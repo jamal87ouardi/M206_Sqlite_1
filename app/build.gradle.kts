@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.m206_sqlite_1"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.m206_sqlite_1"

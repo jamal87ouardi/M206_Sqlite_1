@@ -2,6 +2,7 @@ package com.example.m206_sqlite_1
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -16,7 +17,7 @@ class BDAppart(context : Context) : SQLiteOpenHelper(context,"BD_App",null,1) {
         onCreate(db)
     }
 
-    fun ajouterAppart(appart : Appartement) {
+    fun ajouterAppart(appart : Appartement):Long {
 
         val db = this.writableDatabase
         val values = ContentValues()
@@ -25,8 +26,34 @@ class BDAppart(context : Context) : SQLiteOpenHelper(context,"BD_App",null,1) {
         values.put("surface", appart.surface)
         values.put("avecParking", appart.avecParking)
         values.put("image", appart.image)
-        db.insert("Appart_Table", null, values)
-        db.close()
+        return db.insert("Appart_Table", null, values)
+
+    }
+
+    fun getAll():ArrayList<Appartement> {
+
+        var AppartList = ArrayList<Appartement>()
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM Appart_Table", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(0)
+                val offre = cursor.getString(1)
+                val surface = cursor.getInt(2)
+                val avecParking = cursor.getInt(3)
+                val image = cursor.getString(4)
+
+                val app = Appartement(id,offre,surface,avecParking,image)
+
+                AppartList.add(app)
+
+            } while (cursor.moveToNext())
+        }
+
+
+        return AppartList
 
     }
 
