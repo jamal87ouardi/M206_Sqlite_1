@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class BDAppart(context : Context) : SQLiteOpenHelper(context,"BD_App",null,1) {
+
     override fun onCreate(db: SQLiteDatabase) {
 
         db.execSQL("CREATE TABLE Appart_Table (id INTEGER PRIMARY KEY, offre TEXT, surface INTEGER, avecParking INTEGER, image TEXT)")
@@ -16,16 +17,17 @@ class BDAppart(context : Context) : SQLiteOpenHelper(context,"BD_App",null,1) {
         db.execSQL("DROP TABLE IF EXISTS Appartement")
         onCreate(db)
     }
-
     fun ajouterAppart(appart : Appartement):Long {
 
         val db = this.writableDatabase
         val values = ContentValues()
+
         values.put("id", appart.id)
         values.put("offre", appart.offre)
         values.put("surface", appart.surface)
         values.put("avecParking", appart.avecParking)
         values.put("image", appart.image)
+
         return db.insert("Appart_Table", null, values)
 
     }

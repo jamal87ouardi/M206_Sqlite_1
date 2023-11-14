@@ -22,15 +22,15 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val btnAdd = findViewById<Button>(R.id.Add)
+        val btnAdd = findViewById<Button>(R.id.Update)
 
         btnAdd.setOnClickListener {
 
             val Id = findViewById<EditText>(R.id.ID).text.toString().toInt()
-            val Offre = findViewById<EditText>(R.id.Offre).text.toString()
-            val Surface = findViewById<EditText>(R.id.Surface).text.toString().toInt()
-            val Parking = findViewById<EditText>(R.id.avecParking).text.toString().toInt()
-            val Image = findViewById<EditText>(R.id.image).text.toString()
+            val Offre = findViewById<EditText>(R.id.Offre_up).text.toString()
+            val Surface = findViewById<EditText>(R.id.Surface_up).text.toString().toInt()
+            val Parking = findViewById<EditText>(R.id.avecParking_up).text.toString().toInt()
+            val Image = findViewById<EditText>(R.id.image_up).text.toString()
 
             val A = Appartement(Id,Offre,Surface,Parking,Image)
 
