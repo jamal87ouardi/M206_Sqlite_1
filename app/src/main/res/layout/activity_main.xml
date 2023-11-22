@@ -95,8 +95,20 @@
         android:text="List"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Update"
-        app:layout_constraintVertical_bias="0.517" />
+        app:layout_constraintVertical_bias="0.217" />
+
+    <Button
+        android:id="@+id/GOTOsearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/List"
+        app:layout_constraintVertical_bias="0.482" />
 </androidx.constraintlayout.widget.ConstraintLayout>

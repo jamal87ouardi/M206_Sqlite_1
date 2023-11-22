@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 
 class MainActivity_List : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,56 @@ class MainActivity_List : AppCompatActivity() {
 
         }
 
+
+        listView.setOnItemLongClickListener { parent, view, position, id ->
+            val selectedAppart = AppartList[position]
+            val db = BDAppart(applicationContext)
+            if(db.deleteAppart(selectedAppart.id) > 0) {
+                Toast.makeText(applicationContext,"Succesfuly Deleted", Toast.LENGTH_LONG).show()
+            }
+
+            else {
+
+
+                Toast.makeText(applicationContext,"Failure", Toast.LENGTH_LONG).show()
+            }
+
+            refreshActivity()
+
+            true // Consume the event, return true
+        }
+
+
+
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        refreshActivity()
+    }
+
+    private fun refreshActivity() {
+
+        val listView = findViewById<ListView>(R.id.listview)
+
+        val db = BDAppart(applicationContext)
+
+        val AppartList = db.getAll()
+
+        val StringList = ArrayList<String>()
+
+        for(app in AppartList){
+
+            StringList.add(app.toString())
+
+        }
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, StringList)
+
+        listView.adapter = adapter
 
     }
 

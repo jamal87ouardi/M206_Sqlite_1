@@ -28,8 +28,9 @@ class BDAppart(context : Context) : SQLiteOpenHelper(context,"BD_App",null,1) {
         values.put("avecParking", appart.avecParking)
         values.put("image", appart.image)
 
-        return db.insert("Appart_Table", null, values)
-
+        val inserted = db.insert("Appart_Table", null, values)
+        db.close()
+        return inserted
     }
 
     fun getAll():ArrayList<Appartement> {
@@ -54,9 +55,36 @@ class BDAppart(context : Context) : SQLiteOpenHelper(context,"BD_App",null,1) {
             } while (cursor.moveToNext())
         }
 
-
+        db.close()
         return AppartList
 
+    }
+
+    fun updateAppart(id : Int, newOffre:String, newSurface : Int, newAvecParking : Int, newImage : String):Int{
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+
+        values.put("offre", newOffre)
+        values.put("surface", newSurface)
+        values.put("avecParking", newAvecParking)
+        values.put("image", newImage)
+
+        val whereClause = "id = ?"
+        val whereArgs = arrayOf(id.toString())
+
+        // Perform the update
+        return db.update("Appart_Table", values, whereClause, whereArgs)
+
+    }
+
+    fun deleteAppart(id:Int):Int {
+        val db = writableDatabase
+        val whereClause = "id = ?"
+        val whereArgs = arrayOf(id.toString())
+        val deletedRows = db.delete("Appart_Table", whereClause, whereArgs)
+        db.close()
+        return deletedRows
     }
 
 
